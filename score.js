@@ -14,7 +14,7 @@ function distance(point) {
 
 function runAnalysis() {
   // Write code here to analyze stuff
-  _.chain(outputs)
+  const bucket = _.chain(outputs)
     .map(row => [distance(row[0]), row[3]])
     .sortBy(row => row[0])
     .slice(0, k)
@@ -25,4 +25,6 @@ function runAnalysis() {
     .first()
     .parseInt()
     .value();
+
+  console.log('Your point will probaby be in bucket ', bucket);
 }

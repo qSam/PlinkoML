@@ -13,7 +13,11 @@ function distance(pointA, pointB) {
 
 function runAnalysis() {
   // Write code here to analyze stuff
-  const bucket = console.log('Your point will probaby be in bucket ', bucket);
+  const [testSet, trainingSet] = splitDataset(outputs, 10);
+  for (let i = 0; i < testSet.length; i++) {
+    const bucket = knn(trainingSet, testSet[i][0]);
+    console.log(bucket, testSet[i][3]);
+  }
 }
 
 function knn(data, point) {

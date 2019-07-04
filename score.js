@@ -20,7 +20,7 @@ function distance(pointA, pointB) {
 function runAnalysis() {
   // Write code here to analyze stuff
   const testSetSize = 50;
-  const [testSet, trainingSet] = splitDataset(outputs, testSetSize);
+  const [testSet, trainingSet] = splitDataset(minMax(outputs, 3), testSetSize);
 
   _.range(1, 15).forEach(k => {
     const accuracy = _.chain(testSet)

@@ -20,17 +20,20 @@ function distance(pointA, pointB) {
 function runAnalysis() {
   // Write code here to analyze stuff
   const testSetSize = 50;
-  const [testSet, trainingSet] = splitDataset(minMax(outputs, 3), testSetSize);
+  const k = 10;
 
-  _.range(1, 15).forEach(k => {
+  _.range(0, 3).forEach(feature => {
+    const data = _.map(outputs, [row => row[feature], row[3]]);
+    const [testSet, trainingSet] = splitDataset(minMax(data, 1), testSetSize);
     const accuracy = _.chain(testSet)
       .filter(
-        testPoint => knn(trainingSet, _.initial(testPoint), k) === testPoint[3]
+        testPoint =>
+          knn(trainingSet, _.initial(testPoint), k) === _.last(testPoint)
       )
       .size()
       .divide(testSetSize)
       .value();
-    console.log('For k of ', k, ', accuracy is ', accuracy);
+    console.log('For feature of ', feature, ', accuracy is ', accuracy);
   });
 }
 
